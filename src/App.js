@@ -1,8 +1,8 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import { Route, NavLink } from "react-router-dom";
 
-import GameOfLife from "./components/GameOfLife";
+import GameOfLife from "./components/GameOfLife/GameOfLife";
 import About from "./components/About";
 
 function App() {
