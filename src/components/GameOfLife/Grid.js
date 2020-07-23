@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import ControlPanel from "./ControlPanel";
 
 function Grid() {
   const canvasRef = useRef(null);
@@ -61,6 +62,7 @@ function Grid() {
   return (
     <div>
       <canvas ref={canvasRef} onClick={handleCanvasClick} />
+      <ControlPanel setCoordinates={setCoordinates} coordinates={coordinates} />
     </div>
   );
 }
