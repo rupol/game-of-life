@@ -1,12 +1,12 @@
 import React from "react";
-import Board from "./Board";
+import Grid from "./Grid";
 import ControlPanel from "./ControlPanel";
 
 function GameOfLife() {
   return (
     <div className="game-of-life">
       <h1>Conway's Game of Life</h1>
-      <Board />
+      <Grid />
       <ControlPanel />
     </div>
   );
