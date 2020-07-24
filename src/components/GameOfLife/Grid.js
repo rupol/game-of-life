@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCanvas } from "../../hooks/useCanvas";
+import findNextGrid from "../../utils/findNextGrid";
 import ControlPanel from "./ControlPanel";
 
 function Grid() {
@@ -12,6 +13,7 @@ function Grid() {
     gridArr,
     setGridArr,
   ] = useCanvas();
+  const [currentGen, setCurrentGen] = useState(0);
 
   // returns the x,y coordinates of the square surrounding the current mouse coordinates
   function getCurrentSquare(e) {
@@ -45,15 +47,25 @@ function Grid() {
     setGridArr(emptyGrid);
   }
 
+  function advanceOneGen() {
+    setGridArr(findNextGrid(gridArr, canvasWidth, canvasHeight, resolution));
+    setCurrentGen(currentGen + 1);
+  }
+
+  function handleStart() {
+    advanceOneGen();
+  }
+
   return (
     <div>
+      <h2>Current Generation: {currentGen}</h2>
       <canvas
         ref={canvasRef}
         width={canvasWidth}
         height={canvasHeight}
         onClick={handleCanvasClick}
       />
-      <ControlPanel handleClear={handleClear} />
+      <ControlPanel handleClear={handleClear} handleStart={handleStart} />
     </div>
   );
 }

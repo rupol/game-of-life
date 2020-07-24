@@ -3,7 +3,7 @@ import React from "react";
 function ControlPanel(props) {
   return (
     <div className="controls">
-      <button>Play</button>
+      <button onClick={props.handleStart}>Play</button>
       <button>Pause</button>
       <button>Stop</button>
       <button onClick={props.handleClear}>Clear</button>

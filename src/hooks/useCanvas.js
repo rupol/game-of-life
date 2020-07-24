@@ -1,14 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 
-export const canvasWidth = 600;
+export const canvasWidth = 800;
 export const canvasHeight = 600;
-export const resolution = 50;
+export const resolution = 20;
 
 const COLS = canvasWidth / resolution;
 const ROWS = canvasHeight / resolution;
-// create array of cells representing canvas height/width/resolution
 
-// TODO: fill squares based on 0(dead) or 1(alive) values in grid array
 export function useCanvas() {
   const canvasRef = useRef(null);
   // create array of cells representing canvas height/width/resolution
@@ -40,8 +38,6 @@ export function useCanvas() {
         }
       }
     }
-    // clear the canvas area before rendering the coordinates held in state
-    // ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     render(gridArr, ctx);
   }, [gridArr]);
 
