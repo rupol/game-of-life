@@ -12,8 +12,10 @@ const ROWS = canvasHeight / resolution;
 export function useCanvas() {
   const canvasRef = useRef(null);
   // create array of cells representing canvas height/width/resolution
-  const grid = new Array(COLS).fill(null).map(() => new Array(ROWS).fill(0));
-  const [gridArr, setGridArr] = useState(grid);
+  const emptyGrid = new Array(COLS)
+    .fill(null)
+    .map(() => new Array(ROWS).fill(0));
+  const [gridArr, setGridArr] = useState(emptyGrid);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -48,6 +50,7 @@ export function useCanvas() {
     canvasWidth,
     canvasHeight,
     resolution,
+    emptyGrid,
     gridArr,
     setGridArr,
   ];
