@@ -7,6 +7,7 @@ import findNextGrid from "../../utils/findNextGrid";
 import setGridConfig from "../../utils/setGridConfig";
 
 import ControlPanel from "./ControlPanel";
+import { Badge } from "reactstrap";
 
 function Grid() {
   const [
@@ -68,14 +69,20 @@ function Grid() {
   }
 
   return (
-    <div>
-      <h2>Current Generation: {currentGen}</h2>
-      <canvas
-        ref={canvasRef}
-        width={canvasWidth}
-        height={canvasHeight}
-        onClick={handleCanvasClick}
-      />
+    <div className="game container">
+      <h1 className="display-3">Conway's Game of Life</h1>
+      <h2>
+        Generation <Badge>{currentGen}</Badge>
+      </h2>
+      <div className="grid">
+        <canvas
+          ref={canvasRef}
+          width={canvasWidth}
+          height={canvasHeight}
+          onClick={handleCanvasClick}
+        />
+      </div>
+
       <ControlPanel
         handleClear={handleClear}
         handleStart={handleStart}

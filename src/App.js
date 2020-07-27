@@ -1,22 +1,27 @@
 import React from "react";
 import "./App.scss";
-import { Route, NavLink } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
+import { Navbar, NavbarBrand, NavItem, NavLink, Nav } from "reactstrap";
 
-import GameOfLife from "./components/GameOfLife/GameOfLife";
 import About from "./components/About";
+import Grid from "./components/GameOfLife/Grid";
 
 function App() {
   return (
     <div className="App">
-      <nav>
-        <NavLink exact to="/">
+      <Navbar color="dark" dark>
+        <NavbarBrand tag={Link} to="/">
           Game of Life
-        </NavLink>
-        <NavLink exact to="/about">
-          About
-        </NavLink>
-      </nav>
-      <Route exact path="/" component={GameOfLife} />
+        </NavbarBrand>
+        <Nav navbar>
+          <NavItem>
+            <NavLink tag={Link} to="/about">
+              About
+            </NavLink>
+          </NavItem>
+        </Nav>
+      </Navbar>
+      <Route exact path="/" component={Grid} />
       <Route exact path="/about" component={About} />
     </div>
   );

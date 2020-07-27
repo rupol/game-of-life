@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 export const canvasWidth = 800;
-export const canvasHeight = 600;
+export const canvasHeight = 800;
 
 export function useCanvas() {
   const [resolution, setResolution] = useState(20);
@@ -32,8 +32,9 @@ export function useCanvas() {
             resolution,
             resolution
           );
-          context.fillStyle = cell ? "black" : "white";
+          context.fillStyle = cell ? "black" : "#999fa5";
           context.fill();
+          context.strokeStyle = "#212529";
           context.stroke();
         }
       }
