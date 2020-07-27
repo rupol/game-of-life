@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+
 import { useCanvas } from "../../hooks/useCanvas";
+
+import getCurrentSquare from "../../utils/getCurrentSquare";
 import findNextGrid from "../../utils/findNextGrid";
+import setGridConfig from "../../utils/setGridConfig";
+
 import ControlPanel from "./ControlPanel";
 
 function Grid() {
@@ -15,18 +20,12 @@ function Grid() {
   ] = useCanvas();
   const [currentGen, setCurrentGen] = useState(0);
 
-  // returns the x,y coordinates of the square surrounding the current mouse coordinates
-  function getCurrentSquare(e) {
-    let bound = canvasRef.current.getBoundingClientRect();
-    return {
-      x: e.clientX - bound.left - ((e.clientX - bound.left) % resolution),
-      y: e.clientY - bound.top - ((e.clientY - bound.top) % resolution),
-    };
-  }
-
   function handleCanvasClick(e) {
-    let mousePosition = getCurrentSquare(e);
+    let mousePosition = getCurrentSquare(e, canvasRef, resolution);
     const currentCoord = { x: mousePosition.x, y: mousePosition.y };
+    // console.log(
+    //   `grid[${currentCoord.x / resolution}][${currentCoord.y / resolution}]`
+    // );
     const newGrid = gridArr.map((row, key) => {
       if (key === currentCoord.x / resolution) {
         return row.map((item, colKey) => {
@@ -43,6 +42,7 @@ function Grid() {
     setGridArr(newGrid);
   }
 
+  // control panel function handlers
   function handleClear() {
     setGridArr(emptyGrid);
   }
@@ -56,6 +56,12 @@ function Grid() {
     advanceOneGen();
   }
 
+  function handleConfig(e) {
+    setGridArr(
+      setGridConfig(e.target.value, canvasWidth, canvasHeight, resolution)
+    );
+  }
+
   return (
     <div>
       <h2>Current Generation: {currentGen}</h2>
@@ -65,7 +71,12 @@ function Grid() {
         height={canvasHeight}
         onClick={handleCanvasClick}
       />
-      <ControlPanel handleClear={handleClear} handleStart={handleStart} />
+      <ControlPanel
+        handleClear={handleClear}
+        handleStart={handleStart}
+        handleConfig={handleConfig}
+        resolution={resolution}
+      />
     </div>
   );
 }

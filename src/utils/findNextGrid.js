@@ -30,8 +30,8 @@ export default function findNextGrid(
           if (
             cellX >= 0 &&
             cellY >= 0 &&
-            cellX < canvasWidth / resolution &&
-            cellY < canvasHeight / resolution
+            cellX < Math.floor(canvasWidth / resolution) &&
+            cellY < Math.floor(canvasHeight / resolution)
           ) {
             // add up all cell neighbors
             const currentNeighbor = grid[col + i][row + j];

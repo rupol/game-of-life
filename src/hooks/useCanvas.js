@@ -4,8 +4,8 @@ export const canvasWidth = 800;
 export const canvasHeight = 600;
 export const resolution = 20;
 
-const COLS = canvasWidth / resolution;
-const ROWS = canvasHeight / resolution;
+const COLS = Math.floor(canvasWidth / resolution);
+const ROWS = Math.floor(canvasHeight / resolution);
 
 export function useCanvas() {
   const canvasRef = useRef(null);
