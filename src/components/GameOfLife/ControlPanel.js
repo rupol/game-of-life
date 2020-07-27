@@ -2,15 +2,11 @@ import React, { useState } from "react";
 import {
   Button,
   ButtonDropdown,
-  Dropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   Input,
   Label,
-  Container,
-  Row,
-  Col,
 } from "reactstrap";
 
 function ControlPanel(props) {
