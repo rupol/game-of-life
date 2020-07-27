@@ -14,6 +14,7 @@ function Grid() {
     canvasWidth,
     canvasHeight,
     resolution,
+    setResolution,
     emptyGrid,
     gridArr,
     setGridArr,
@@ -62,6 +63,10 @@ function Grid() {
     );
   }
 
+  function handleSize(e) {
+    setResolution(e.target.value);
+  }
+
   return (
     <div>
       <h2>Current Generation: {currentGen}</h2>
@@ -75,6 +80,7 @@ function Grid() {
         handleClear={handleClear}
         handleStart={handleStart}
         handleConfig={handleConfig}
+        handleSize={handleSize}
         resolution={resolution}
       />
     </div>

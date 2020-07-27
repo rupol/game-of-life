@@ -2,19 +2,19 @@ import { useState, useEffect, useRef } from "react";
 
 export const canvasWidth = 800;
 export const canvasHeight = 600;
-export const resolution = 20;
-
-const COLS = Math.floor(canvasWidth / resolution);
-const ROWS = Math.floor(canvasHeight / resolution);
 
 export function useCanvas() {
+  const [resolution, setResolution] = useState(20);
   const canvasRef = useRef(null);
+
+  const COLS = Math.floor(canvasWidth / resolution);
+  const ROWS = Math.floor(canvasHeight / resolution);
+
   // create array of cells representing canvas height/width/resolution
   const emptyGrid = new Array(COLS)
     .fill(null)
     .map(() => new Array(ROWS).fill(0));
   const [gridArr, setGridArr] = useState(emptyGrid);
-
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -39,13 +39,14 @@ export function useCanvas() {
       }
     }
     render(gridArr, ctx);
-  }, [gridArr]);
+  }, [gridArr, resolution]);
 
   return [
     canvasRef,
     canvasWidth,
     canvasHeight,
     resolution,
+    setResolution,
     emptyGrid,
     gridArr,
     setGridArr,
