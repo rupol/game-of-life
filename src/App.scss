@@ -3,11 +3,22 @@
   margin: 0 auto;
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .grid {
   width: 100%;
   text-align: center;
 }
 
-button {
+button,
+.slider {
   margin: 5px;
+}
+
+.form-row {
+  justify-content: space-between;
 }

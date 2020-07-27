@@ -47,6 +47,7 @@ function Grid() {
   // control panel function handlers
   function handleClear() {
     setGridArr(emptyGrid);
+    setCurrentGen(0);
   }
 
   function advanceOneGen() {
@@ -62,6 +63,7 @@ function Grid() {
     setGridArr(
       setGridConfig(e.target.value, canvasWidth, canvasHeight, resolution)
     );
+    setCurrentGen(0);
   }
 
   function handleSize(e) {
@@ -71,9 +73,7 @@ function Grid() {
   return (
     <div className="game container">
       <h1 className="display-3">Conway's Game of Life</h1>
-      <h2>
-        Generation <Badge>{currentGen}</Badge>
-      </h2>
+
       <div className="grid">
         <canvas
           ref={canvasRef}
@@ -82,14 +82,19 @@ function Grid() {
           onClick={handleCanvasClick}
         />
       </div>
+      <div className="flex">
+        <h2>
+          Generation <Badge>{currentGen}</Badge>
+        </h2>
 
-      <ControlPanel
-        handleClear={handleClear}
-        handleStart={handleStart}
-        handleConfig={handleConfig}
-        handleSize={handleSize}
-        resolution={resolution}
-      />
+        <ControlPanel
+          handleClear={handleClear}
+          handleStart={handleStart}
+          handleConfig={handleConfig}
+          handleSize={handleSize}
+          resolution={resolution}
+        />
+      </div>
     </div>
   );
 }
