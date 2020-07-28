@@ -16,7 +16,9 @@ function ControlPanel(props) {
 
   return (
     <div className="controls form-row">
-      <Button onClick={props.handleStart}>Play</Button>
+      <Button onClick={props.handleNext}>Next</Button>
+      <Button onClick={props.handleStart}>Start</Button>
+      <Button onClick={props.handleStop}>Stop</Button>
       <Button onClick={props.handleClear}>Clear</Button>
       <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle>Select a Preset</DropdownToggle>

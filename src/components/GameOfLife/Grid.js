@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 import { useCanvas } from "../../hooks/useCanvas";
 
@@ -19,8 +19,22 @@ function Grid() {
     emptyGrid,
     gridArr,
     setGridArr,
+    currentGen,
+    setCurrentGen,
+    isRunning,
+    setIsRunning,
   ] = useCanvas();
-  const [currentGen, setCurrentGen] = useState(0);
+
+  function advanceOneGen() {
+    // console.log(Date.now(), currentGen);
+    setGridArr(findNextGrid(gridArr, canvasWidth, canvasHeight, resolution));
+    setCurrentGen(currentGen + 1);
+    requestAnimationFrame(advanceOneGen);
+  }
+
+  // useEffect(() => {
+  //   requestAnimationFrame(advanceOneGen);
+  // }, []);
 
   function handleCanvasClick(e) {
     let mousePosition = getCurrentSquare(e, canvasRef, resolution);
@@ -50,13 +64,20 @@ function Grid() {
     setCurrentGen(0);
   }
 
-  function advanceOneGen() {
+  function handleNext() {
     setGridArr(findNextGrid(gridArr, canvasWidth, canvasHeight, resolution));
     setCurrentGen(currentGen + 1);
   }
 
+  // start and stop the animation
   function handleStart() {
-    advanceOneGen();
+    setIsRunning(true);
+    console.log(isRunning);
+  }
+
+  function handleStop() {
+    setIsRunning(false);
+    console.log(isRunning);
   }
 
   function handleConfig(e) {
@@ -89,7 +110,9 @@ function Grid() {
 
         <ControlPanel
           handleClear={handleClear}
+          handleNext={handleNext}
           handleStart={handleStart}
+          handleStop={handleStop}
           handleConfig={handleConfig}
           handleSize={handleSize}
           resolution={resolution}

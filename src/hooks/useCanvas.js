@@ -5,6 +5,8 @@ export const canvasHeight = 800;
 
 export function useCanvas() {
   const [resolution, setResolution] = useState(20);
+  const [currentGen, setCurrentGen] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
   const canvasRef = useRef(null);
 
   const COLS = Math.floor(canvasWidth / resolution);
@@ -14,7 +16,9 @@ export function useCanvas() {
   const emptyGrid = new Array(COLS)
     .fill(null)
     .map(() => new Array(ROWS).fill(0));
+
   const [gridArr, setGridArr] = useState(emptyGrid);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -39,8 +43,9 @@ export function useCanvas() {
         }
       }
     }
+
     render(gridArr, ctx);
-  }, [gridArr, resolution]);
+  }, [gridArr, resolution, currentGen, isRunning]);
 
   return [
     canvasRef,
@@ -51,5 +56,9 @@ export function useCanvas() {
     emptyGrid,
     gridArr,
     setGridArr,
+    currentGen,
+    setCurrentGen,
+    isRunning,
+    setIsRunning,
   ];
 }
