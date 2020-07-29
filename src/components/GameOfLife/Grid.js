@@ -58,13 +58,15 @@ function Grid() {
   }
 
   function handleNext() {
+    if (isRunning) {
+      handleStop();
+    }
     setGridArr((prevGridArr) =>
       findNextGrid(prevGridArr, canvasWidth, canvasHeight, resolution)
     );
     setCurrentGen((prevGen) => prevGen + 1);
   }
 
-  // start and stop the animation
   function handleStart() {
     setIsRunning(true);
     interval.current = setInterval(
