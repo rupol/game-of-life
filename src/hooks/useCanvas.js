@@ -35,7 +35,7 @@ export function useCanvas() {
             resolution,
             resolution
           );
-          context.fillStyle = cell ? "black" : "#c3c3c3";
+          context.fillStyle = cell ? "black" : "#e9ecef";
           context.fill();
           context.strokeStyle = "#212529";
           context.stroke();

@@ -27,6 +27,13 @@ function Grid() {
     setCurrentGen,
   ] = useCanvas();
 
+  function update() {
+    setGridArr((prevGridArr) =>
+      findNextGrid(prevGridArr, canvasWidth, canvasHeight, resolution)
+    );
+    setCurrentGen((prevGen) => prevGen + 1);
+  }
+
   function handleCanvasClick(e) {
     handleStop();
     let mousePosition = getCurrentSquare(e, canvasRef, resolution);
@@ -51,33 +58,27 @@ function Grid() {
   }
 
   // control panel function handlers
-  function handleClear() {
-    handleStop();
-    setGridArr(emptyGrid);
-    setCurrentGen(0);
-  }
-
   function handleNext() {
     if (isRunning) {
       handleStop();
     }
-    setGridArr((prevGridArr) =>
-      findNextGrid(prevGridArr, canvasWidth, canvasHeight, resolution)
-    );
-    setCurrentGen((prevGen) => prevGen + 1);
+    update();
   }
 
   function handleStart() {
     setIsRunning(true);
-    interval.current = setInterval(
-      () => requestAnimationFrame(handleNext),
-      speed
-    );
+    interval.current = setInterval(() => requestAnimationFrame(update), speed);
   }
 
   function handleStop() {
     setIsRunning(false);
     clearInterval(interval.current);
+  }
+
+  function handleClear() {
+    handleStop();
+    setGridArr(emptyGrid);
+    setCurrentGen(0);
   }
 
   function handleConfig(e) {
