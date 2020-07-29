@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef } from "react";
 
 import { useCanvas } from "../../hooks/useCanvas";
-import { useAnimeFrame } from "../../hooks/useAnimation";
 
 import getCurrentSquare from "../../utils/getCurrentSquare";
 import findNextGrid from "../../utils/findNextGrid";
@@ -11,6 +10,7 @@ import ControlPanel from "./ControlPanel";
 import { Badge } from "reactstrap";
 
 function Grid() {
+  const interval = useRef(null);
   const [
     canvasRef,
     canvasWidth,
@@ -24,25 +24,8 @@ function Grid() {
     setCurrentGen,
   ] = useCanvas();
 
-  //  game loop
-  let counter = 0;
-  const [isRunning, setIsRunning] = useState(false);
-
-  function update() {
-    setGridArr(findNextGrid(gridArr, canvasWidth, canvasHeight, resolution));
-    setCurrentGen((counter += 1));
-
-    setTimeout(() => requestAnimationFrame(update), 1000);
-    console.log(Date.now(), currentGen, isRunning);
-  }
-
-  useEffect(() => {
-    if (isRunning) {
-      requestAnimationFrame(update);
-    }
-  }, [isRunning]);
-
   function handleCanvasClick(e) {
+    handleStop();
     let mousePosition = getCurrentSquare(e, canvasRef, resolution);
     const currentCoord = { x: mousePosition.x, y: mousePosition.y };
     // console.log(
@@ -66,27 +49,32 @@ function Grid() {
 
   // control panel function handlers
   function handleClear() {
+    handleStop();
     setGridArr(emptyGrid);
     setCurrentGen(0);
   }
 
   function handleNext() {
-    setGridArr(findNextGrid(gridArr, canvasWidth, canvasHeight, resolution));
-    setCurrentGen(currentGen + 1);
+    setGridArr((prevGridArr) =>
+      findNextGrid(prevGridArr, canvasWidth, canvasHeight, resolution)
+    );
+    setCurrentGen((prevGen) => prevGen + 1);
   }
 
   // start and stop the animation
   function handleStart() {
-    setIsRunning(true);
-    console.log("start", isRunning);
+    interval.current = setInterval(
+      () => requestAnimationFrame(handleNext),
+      500
+    );
   }
 
   function handleStop() {
-    setIsRunning(false);
-    console.log("stop", isRunning);
+    clearInterval(interval.current);
   }
 
   function handleConfig(e) {
+    handleStop();
     setGridArr(
       setGridConfig(e.target.value, canvasWidth, canvasHeight, resolution)
     );
@@ -94,6 +82,7 @@ function Grid() {
   }
 
   function handleSize(e) {
+    handleStop();
     setResolution(e.target.value);
   }
 
