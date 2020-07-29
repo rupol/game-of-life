@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useCanvas } from "../../hooks/useCanvas";
+import { useAnimeFrame } from "../../hooks/useAnimation";
 
 import getCurrentSquare from "../../utils/getCurrentSquare";
 import findNextGrid from "../../utils/findNextGrid";
@@ -21,20 +22,25 @@ function Grid() {
     setGridArr,
     currentGen,
     setCurrentGen,
-    isRunning,
-    setIsRunning,
   ] = useCanvas();
 
-  function advanceOneGen() {
-    // console.log(Date.now(), currentGen);
+  //  game loop
+  let counter = 0;
+  const [isRunning, setIsRunning] = useState(false);
+
+  function update() {
     setGridArr(findNextGrid(gridArr, canvasWidth, canvasHeight, resolution));
-    setCurrentGen(currentGen + 1);
-    requestAnimationFrame(advanceOneGen);
+    setCurrentGen((counter += 1));
+
+    setTimeout(() => requestAnimationFrame(update), 1000);
+    console.log(Date.now(), currentGen, isRunning);
   }
 
-  // useEffect(() => {
-  //   requestAnimationFrame(advanceOneGen);
-  // }, []);
+  useEffect(() => {
+    if (isRunning) {
+      requestAnimationFrame(update);
+    }
+  }, [isRunning]);
 
   function handleCanvasClick(e) {
     let mousePosition = getCurrentSquare(e, canvasRef, resolution);
@@ -72,12 +78,12 @@ function Grid() {
   // start and stop the animation
   function handleStart() {
     setIsRunning(true);
-    console.log(isRunning);
+    console.log("start", isRunning);
   }
 
   function handleStop() {
     setIsRunning(false);
-    console.log(isRunning);
+    console.log("stop", isRunning);
   }
 
   function handleConfig(e) {

@@ -6,7 +6,6 @@ export const canvasHeight = 800;
 export function useCanvas() {
   const [resolution, setResolution] = useState(20);
   const [currentGen, setCurrentGen] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
   const canvasRef = useRef(null);
 
   const COLS = Math.floor(canvasWidth / resolution);
@@ -36,7 +35,7 @@ export function useCanvas() {
             resolution,
             resolution
           );
-          context.fillStyle = cell ? "black" : "#999fa5";
+          context.fillStyle = cell ? "black" : "#c3c3c3";
           context.fill();
           context.strokeStyle = "#212529";
           context.stroke();
@@ -45,7 +44,7 @@ export function useCanvas() {
     }
 
     render(gridArr, ctx);
-  }, [gridArr, resolution, currentGen, isRunning]);
+  }, [gridArr, resolution, currentGen]);
 
   return [
     canvasRef,
@@ -58,7 +57,5 @@ export function useCanvas() {
     setGridArr,
     currentGen,
     setCurrentGen,
-    isRunning,
-    setIsRunning,
   ];
 }
