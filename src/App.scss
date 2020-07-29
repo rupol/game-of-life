@@ -19,6 +19,10 @@ button,
   margin: 5px;
 }
 
+.reversed input {
+  direction: rtl;
+}
+
 .form-row {
   justify-content: space-between;
 }

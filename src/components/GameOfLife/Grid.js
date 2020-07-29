@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import { useCanvas } from "../../hooks/useCanvas";
 
@@ -11,6 +11,9 @@ import { Badge } from "reactstrap";
 
 function Grid() {
   const interval = useRef(null);
+  const [isRunning, setIsRunning] = useState(false);
+  const [speed, setSpeed] = useState(500);
+
   const [
     canvasRef,
     canvasWidth,
@@ -63,13 +66,15 @@ function Grid() {
 
   // start and stop the animation
   function handleStart() {
+    setIsRunning(true);
     interval.current = setInterval(
       () => requestAnimationFrame(handleNext),
-      500
+      speed
     );
   }
 
   function handleStop() {
+    setIsRunning(false);
     clearInterval(interval.current);
   }
 
@@ -82,13 +87,22 @@ function Grid() {
   }
 
   function handleSize(e) {
-    handleStop();
     setResolution(e.target.value);
+    handleClear();
+  }
+
+  function handleSpeed(e) {
+    handleStop();
+    setSpeed(e.target.value);
+    handleStart();
   }
 
   return (
     <div className="game container">
       <h1 className="display-3">Conway's Game of Life</h1>
+      <h2>
+        Generation <Badge>{currentGen}</Badge>
+      </h2>
 
       <div className="grid">
         <canvas
@@ -98,21 +112,17 @@ function Grid() {
           onClick={handleCanvasClick}
         />
       </div>
-      <div className="flex">
-        <h2>
-          Generation <Badge>{currentGen}</Badge>
-        </h2>
-
-        <ControlPanel
-          handleClear={handleClear}
-          handleNext={handleNext}
-          handleStart={handleStart}
-          handleStop={handleStop}
-          handleConfig={handleConfig}
-          handleSize={handleSize}
-          resolution={resolution}
-        />
-      </div>
+      <ControlPanel
+        handleClear={handleClear}
+        handleNext={handleNext}
+        handleStart={handleStart}
+        handleStop={handleStop}
+        handleConfig={handleConfig}
+        handleSize={handleSize}
+        handleSpeed={handleSpeed}
+        resolution={resolution}
+        isRunning={isRunning}
+      />
     </div>
   );
 }

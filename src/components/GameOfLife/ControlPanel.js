@@ -15,10 +15,13 @@ function ControlPanel(props) {
   const toggle = () => setOpen(!dropdownOpen);
 
   return (
-    <div className="controls form-row">
+    <div className="flex">
       <Button onClick={props.handleNext}>Next</Button>
-      <Button onClick={props.handleStart}>Start</Button>
-      <Button onClick={props.handleStop}>Stop</Button>
+      {props.isRunning ? (
+        <Button onClick={props.handleStop}>Stop</Button>
+      ) : (
+        <Button onClick={props.handleStart}>Start</Button>
+      )}
       <Button onClick={props.handleClear}>Clear</Button>
       <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle>Select a Preset</DropdownToggle>
@@ -39,9 +42,20 @@ function ControlPanel(props) {
           type="range"
           step="10"
           id="size"
-          min="20"
+          min="10"
           max="50"
           onChange={props.handleSize}
+        />
+      </div>
+      <div className="slider reversed">
+        <Label htmlFor="speed">Speed:</Label>
+        <Input
+          type="range"
+          step="10"
+          id="size"
+          min="10"
+          max="1000"
+          onChange={props.handleSpeed}
         />
       </div>
     </div>
