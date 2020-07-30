@@ -6,7 +6,7 @@ export const canvasWidth = 800;
 export const canvasHeight = 800;
 
 export function useCanvas() {
-  const [resolution, setResolution] = useState(20);
+  const [resolution, setResolution] = useState(10);
   const [currentGen, setCurrentGen] = useState(0);
   const canvasRef = useRef(null);
 
@@ -44,7 +44,6 @@ export function useCanvas() {
               luminosity: "light",
             });
             context.fillStyle = `${color}`;
-            // console.log(color);
           } else {
             context.fillStyle = "black";
           }
@@ -55,6 +54,7 @@ export function useCanvas() {
         }
       }
     }
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
     render(gridArr, ctx);
   }, [gridArr, resolution, currentGen]);
