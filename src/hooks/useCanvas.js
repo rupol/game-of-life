@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+// var randomColor = require('randomcolor');
+// import randomColor from "randomcolor";
 
 export const canvasWidth = 800;
 export const canvasHeight = 800;
@@ -35,7 +37,18 @@ export function useCanvas() {
             resolution,
             resolution
           );
-          context.fillStyle = cell ? "black" : "#e9ecef";
+          if (cell) {
+            var randomColor = require("randomcolor");
+            var color = randomColor({
+              hue: "purple",
+              luminosity: "light",
+            });
+            context.fillStyle = `${color}`;
+            // console.log(color);
+          } else {
+            context.fillStyle = "black";
+          }
+
           context.fill();
           context.strokeStyle = "#212529";
           context.stroke();
