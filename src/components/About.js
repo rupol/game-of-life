@@ -13,27 +13,38 @@ function About() {
         The game is played on a grid of square cells and its evolution is only
         determined by its initial state.
       </p>
-      <Jumbotron className="text-dark">
+      <Jumbotron className="text-dark bg-purple">
         <h2 className="display-4">Rules</h2>
         <hr className="my-3" />
         <h3>If a "living" cell has...</h3>
-        <ul>
+        <ul className="no-bullets">
           <li>
-            ...<strong>one or no</strong> living neighbors, it dies, as if by
-            solitude.
+            <span role="img" aria-label="skull">
+              💀
+            </span>
+            <strong>1-</strong> living neighbors, it dies, as if by solitude.
           </li>
           <li>
-            ...<strong>four or more</strong> living neighbors, it dies, as if by
+            <span role="img" aria-label="mask">
+              😷
+            </span>
+            <strong>4+</strong> living neighbors, it dies, as if by
             overpopulation.
           </li>
           <li>
-            ...<strong>two or three</strong> living neighbors, it survives.
+            <span role="img" aria-label="twins">
+              👯
+            </span>
+            <strong>2-3</strong> living neighbors, it survives.
           </li>
         </ul>
         <h3>If a "dead" cell has...</h3>
-        <ul>
+        <ul className="no-bullets">
           <li>
-            ...<strong>three</strong> living neighbors, it is born.
+            <span role="img" aria-label="twins">
+              👶
+            </span>
+            <strong>3</strong> living neighbors, it is born.
           </li>
         </ul>
       </Jumbotron>

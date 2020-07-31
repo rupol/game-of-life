@@ -16,11 +16,17 @@ function ControlPanel(props) {
 
   return (
     <div className="flex">
-      <Button onClick={props.handleNext}>Next</Button>
+      <Button className="icon-btn" onClick={props.handleNext}>
+        <i className="material-icons">skip_next</i>
+      </Button>
       {props.isRunning ? (
-        <Button onClick={props.handleStop}>Stop</Button>
+        <Button className="icon-btn" onClick={props.handleStop}>
+          <i className="material-icons">stop</i>
+        </Button>
       ) : (
-        <Button onClick={props.handleStart}>Start</Button>
+        <Button className="icon-btn" onClick={props.handleStart}>
+          <i className="material-icons">play_arrow</i>
+        </Button>
       )}
       <Button onClick={props.handleClear}>Clear</Button>
       <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
@@ -39,8 +45,8 @@ function ControlPanel(props) {
           <DropdownItem value="random">Random</DropdownItem>
         </DropdownMenu>
       </ButtonDropdown>
-      <div className="slider">
-        <Label htmlFor="size">Cell size:</Label>
+      <div className="slider flex">
+        <Label htmlFor="size">cell size</Label>
         <Input
           type="range"
           step="10"
@@ -50,8 +56,8 @@ function ControlPanel(props) {
           onChange={props.handleSize}
         />
       </div>
-      <div className="slider reversed">
-        <Label htmlFor="speed">Speed:</Label>
+      <div className="slider reversed flex">
+        <Label htmlFor="speed">speed</Label>
         <Input
           type="range"
           step="10"
