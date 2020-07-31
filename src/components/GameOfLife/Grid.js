@@ -101,7 +101,7 @@ function Grid() {
 
   return (
     <div className="game container">
-      <h1 className="display-3">Conway's Game of Life</h1>
+      <h1 className="display-2">Game of Life</h1>
       <h2>
         Generation <Badge className="bg-purple">{currentGen}</Badge>
       </h2>

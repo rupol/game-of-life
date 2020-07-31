@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Navbar color="dark" dark>
         <NavbarBrand tag={Link} to="/">
-          Game of Life
+          Play
         </NavbarBrand>
         <Nav navbar>
           <NavItem>

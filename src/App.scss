@@ -3,8 +3,38 @@ $dark-grey: #212529;
 $lavender: #ffcaff;
 $purple: #f98ff9;
 
-h1 {
+// breakpoints
+$breakpoints: (
+  "mobile": 450px,
+  "tablet": 715px,
+  "desktop": 1000px,
+  "large": 1200px,
+) !default;
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "no value could be retrieved from `#{$breakpoint}`. "+"Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+h1,
+.display-2 {
+  font-size: 4rem;
   color: $purple;
+  @include respond-to(tablet) {
+    font-size: 5.5rem;
+  }
+}
+
+h2 {
+  font-size: 1.6rem;
+  @include respond-to(tablet) {
+    font-size: 2rem;
+  }
 }
 
 .container {
@@ -13,9 +43,23 @@ h1 {
 }
 
 .flex {
+  @include respond-to(tablet) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.flex-half {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 10px 0 20px;
+  @include respond-to(tablet) {
+    width: 50%;
+    margin: 5px 0;
+  }
 }
 
 .grid {
@@ -60,7 +104,10 @@ button,
 }
 
 .slider {
-  margin: 0 10px;
+  margin: 10px 0 20px;
+  @include respond-to(tablet) {
+    margin: 0 10px;
+  }
 }
 
 label {
