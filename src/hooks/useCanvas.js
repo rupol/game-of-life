@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-// var randomColor = require('randomcolor');
-// import randomColor from "randomcolor";
+
+import setGridConfig from "../utils/setGridConfig";
 
 export const canvasWidth = 800;
 export const canvasHeight = 800;
@@ -18,7 +18,9 @@ export function useCanvas() {
     .fill(null)
     .map(() => new Array(ROWS).fill(0));
 
-  const [gridArr, setGridArr] = useState(emptyGrid);
+  const [gridArr, setGridArr] = useState(
+    setGridConfig("human", canvasWidth, canvasHeight, resolution)
+  );
 
   useEffect(() => {
     const canvas = canvasRef.current;

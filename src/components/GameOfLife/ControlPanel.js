@@ -26,13 +26,16 @@ function ControlPanel(props) {
       <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle>Select a Preset</DropdownToggle>
         <DropdownMenu onClick={props.handleConfig}>
-          <DropdownItem value="none">None</DropdownItem>
+          <DropdownItem value="human">Human</DropdownItem>
           <DropdownItem value="beehive">Beehive (still life)</DropdownItem>
           <DropdownItem value="beacon">Beacon</DropdownItem>
           {props.resolution <= 40 && (
             <DropdownItem value="pulsar">Pulsar</DropdownItem>
           )}
           <DropdownItem value="glider">Glider</DropdownItem>
+          {props.resolution <= 20 && (
+            <DropdownItem value="glider-gun">Glider Gun</DropdownItem>
+          )}
           <DropdownItem value="random">Random</DropdownItem>
         </DropdownMenu>
       </ButtonDropdown>

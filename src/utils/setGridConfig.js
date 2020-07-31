@@ -12,7 +12,24 @@ export default function setGridConfig(
   let offsetX = 0;
   let offsetY = 0;
 
-  if (option === "beehive") {
+  if (option === "human") {
+    WIDTH = 4;
+    HEIGHT = 7;
+    offsetX = Math.floor(COLS / 2 - WIDTH / 2);
+    offsetY = Math.floor(ROWS / 2 - HEIGHT / 2);
+
+    newGrid[offsetX + 1][offsetY + 1] = 1;
+    newGrid[offsetX + 1][offsetY + 3] = 1;
+    newGrid[offsetX + 1][offsetY + 6] = 1;
+    newGrid[offsetX + 2][offsetY] = 1;
+    newGrid[offsetX + 2][offsetY + 2] = 1;
+    newGrid[offsetX + 2][offsetY + 3] = 1;
+    newGrid[offsetX + 2][offsetY + 4] = 1;
+    newGrid[offsetX + 2][offsetY + 5] = 1;
+    newGrid[offsetX + 3][offsetY + 1] = 1;
+    newGrid[offsetX + 3][offsetY + 3] = 1;
+    newGrid[offsetX + 3][offsetY + 6] = 1;
+  } else if (option === "beehive") {
     WIDTH = 4;
     HEIGHT = 3;
     offsetX = Math.floor(COLS / 2 - WIDTH / 2);
@@ -68,6 +85,53 @@ export default function setGridConfig(
     newGrid[1][1] = 1;
     newGrid[2][1] = 1;
     newGrid[1][2] = 1;
+  } else if (option === "glider-gun") {
+    // grid has to be at least [36][8] for this to play out properly
+    // resolution < 40
+    WIDTH = 36;
+    HEIGHT = 38;
+    offsetX = Math.floor(COLS / 2 - WIDTH / 2);
+    offsetY = Math.floor(ROWS / 2 - HEIGHT / 2);
+    newGrid[offsetX + 1][offsetY + 5] = 1;
+    newGrid[offsetX + 1][offsetY + 6] = 1;
+    newGrid[offsetX + 2][offsetY + 5] = 1;
+    newGrid[offsetX + 2][offsetY + 6] = 1;
+
+    newGrid[offsetX + 11][offsetY + 5] = 1;
+    newGrid[offsetX + 11][offsetY + 6] = 1;
+    newGrid[offsetX + 11][offsetY + 7] = 1;
+    newGrid[offsetX + 12][offsetY + 4] = 1;
+    newGrid[offsetX + 12][offsetY + 8] = 1;
+    newGrid[offsetX + 13][offsetY + 3] = 1;
+    newGrid[offsetX + 13][offsetY + 9] = 1;
+    newGrid[offsetX + 14][offsetY + 3] = 1;
+    newGrid[offsetX + 14][offsetY + 9] = 1;
+    newGrid[offsetX + 15][offsetY + 6] = 1;
+    newGrid[offsetX + 16][offsetY + 4] = 1;
+    newGrid[offsetX + 16][offsetY + 8] = 1;
+    newGrid[offsetX + 17][offsetY + 5] = 1;
+    newGrid[offsetX + 17][offsetY + 6] = 1;
+    newGrid[offsetX + 17][offsetY + 7] = 1;
+    newGrid[offsetX + 18][offsetY + 6] = 1;
+
+    newGrid[offsetX + 21][offsetY + 3] = 1;
+    newGrid[offsetX + 21][offsetY + 4] = 1;
+    newGrid[offsetX + 21][offsetY + 5] = 1;
+    newGrid[offsetX + 22][offsetY + 3] = 1;
+    newGrid[offsetX + 22][offsetY + 4] = 1;
+    newGrid[offsetX + 22][offsetY + 5] = 1;
+    newGrid[offsetX + 23][offsetY + 2] = 1;
+    newGrid[offsetX + 23][offsetY + 6] = 1;
+
+    newGrid[offsetX + 25][offsetY + 1] = 1;
+    newGrid[offsetX + 25][offsetY + 2] = 1;
+    newGrid[offsetX + 25][offsetY + 6] = 1;
+    newGrid[offsetX + 25][offsetY + 7] = 1;
+
+    newGrid[offsetX + 35][offsetY + 3] = 1;
+    newGrid[offsetX + 35][offsetY + 4] = 1;
+    newGrid[offsetX + 36][offsetY + 3] = 1;
+    newGrid[offsetX + 36][offsetY + 4] = 1;
   } else if (option === "random") {
     newGrid = new Array(COLS)
       .fill(null)
