@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-
 import setGridConfig from "../utils/setGridConfig";
 
 export const canvasWidth = 800;
@@ -14,9 +13,9 @@ export function useCanvas() {
   const ROWS = Math.floor(canvasHeight / resolution);
 
   // create array of cells representing canvas height/width/resolution
-  const emptyGrid = new Array(COLS)
-    .fill(null)
-    .map(() => new Array(ROWS).fill(0));
+  const [emptyGrid] = useState(
+    new Array(COLS).fill(null).map(() => new Array(ROWS).fill(0))
+  );
 
   const [gridArr, setGridArr] = useState(
     setGridConfig("human", canvasWidth, canvasHeight, resolution)

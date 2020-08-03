@@ -91,6 +91,7 @@ function Grid() {
 
   function handleSize(e) {
     setResolution(e.target.value);
+    handleClear();
   }
 
   function handleSpeed(e) {
