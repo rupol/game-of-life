@@ -4,7 +4,7 @@ This project is an implementation of the "Game of Life", which was developed by 
 
 I implemented this game using ReactJS. The game grid is created and animated using canvas.
 
-![preview of project](https://i.gyazo.com/674eeea1f656d32e37def4282e42a48c.gif)
+![preview of project](/public/preview.gif?raw=true)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
