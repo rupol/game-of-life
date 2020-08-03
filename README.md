@@ -1,8 +1,34 @@
-## What is this?
+# What is this?
 
-This project is an implementation of the cellular-automaton, zero player, "Game of Life" developed by John Conway in 1970. Built using ReactJS.
+This project is an implementation of the "Game of Life", which was developed by John Conway in 1970.
+
+I implemented this game using ReactJS. The game grid is created and animated using canvas.
+
+![preview of project](https://i.gyazo.com/674eeea1f656d32e37def4282e42a48c.gif)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Random colors are generated using [David Merfield's Random Color Script](https://github.com/davidmerfield/randomColor).
+
+Base styling with [reactstrap](https://reactstrap.github.io/).
+
+## About Conway's Game of Life
+
+Game of Life is a cellular-automaton, zero player game.
+
+The game is played on a grid of square cells and its evolution is only determined by its initial state.
+
+### Rules
+
+#### If a "living" cell has...
+
+- 1- living neighbors, it dies, as if by solitude 💀
+- 4+ living neighbors, it dies, as if by overpopulation 😷
+- 2-3 living neighbors, it survives 👯
+
+#### If a "dead" cell has...
+
+- 3 living neighbors, it is born 👶
 
 ## Available Scripts
 
