@@ -50,6 +50,7 @@ export function useCanvas() {
           }
 
           context.fill();
+          context.lineWidth = 2;
           context.strokeStyle = "#212529";
           context.stroke();
         }
